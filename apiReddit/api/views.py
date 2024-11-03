@@ -52,12 +52,7 @@ class CommentView(viewsets.ModelViewSet):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
     def list(self, request):
-        queryset = self.filter_queryset(self.get_queryset())
-        page = self.paginate_queryset(queryset)
-
-        if page is not None:
-            serializer = CommentSerializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
+        queryset = Comments.objects.filter(level=0)
 
         serializer = CommentSerializer(queryset, many=True)
         return Response(serializer.data)
