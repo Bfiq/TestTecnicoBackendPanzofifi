@@ -52,7 +52,7 @@ class CommentView(viewsets.ModelViewSet):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
     def list(self, request):
-        queryset = Comments.objects.filter(level=0)
+        queryset = Comments.objects.filter(level=0).order_by('-created_at')
 
         serializer = CommentSerializer(queryset, many=True)
         return Response(serializer.data)
@@ -74,6 +74,6 @@ class CommentView(viewsets.ModelViewSet):
     @action(methods=['get'], detail=True) 
     def responsesToAComment(self, request, pk=None):
         comment = get_object_or_404(Comments, pk=pk)
-        responses = comment.response.all()
+        responses = comment.response.all().order_by('-created_at')
         serializer = CommentSerializer(responses, many=True)
         return Response(serializer.data)
