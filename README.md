@@ -70,6 +70,22 @@ Recuerda estar al mismo nivel de la carpeta donde se encuentra manage.py o apunt
   py manage.py runserver
 ```
 
+### Docker
+1. Monta el contenedor
+```
+  docker-compose up -d
+```
+
+2. Accede al contenedor de python
+```
+  docker exec -it python bash
+```
+
+3. Reaaliza las migraciones
+```
+  python manage.py migrate
+```
+
 ## Endpoints
 1. `/api/comments/`: lista todos los comentarios de "nivel 0" o comentarios pricipales
 2. `/api/comments/<id>`: Muestra un comentario en concreto según su id
